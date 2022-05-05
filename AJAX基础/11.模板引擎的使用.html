@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./0JS/template-web.js"></script>
+    <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+
+    <div id="container"></div>
+
+    <!-- 3.定义模板 -->
+    <!-- 模板和html必须定义到script中 -->
+    <script type="text/html" id="tpl-user">
+        <h1> {{name}} -----{{age}}</h1>
+        <!-- 原文输出 -->
+        {{@ test}}
+
+        <div>
+            <!-- 判断数据 -->
+            {{if flag===0}} flag的值是零{{else if flag===1}}flag的值是1 {{/if}}
+        </div>
+
+        <!-- 循环输出语法 -->
+        <Ul>
+            {{each hobby}}
+            <li>索引是：{{$index}},循环项是{{$value}}</li>
+            {{/each}}
+        </Ul>
+
+        <h3>{{regTime|dateFormat}}</h3>
+    </script>
+
+
+    <script>
+        // 定义处理时间的过滤器
+        template.defaults.imports.dateFormat = function(date) {
+            var y = date.getFullYear()
+            var m = date.getMonth() + 1
+            var d = date.getDate()
+
+            return y + '-' + m + '-' + d
+        }
+
+
+        //第二步 定义需要演示的数据
+        var data = {
+            name: 'zs',
+            age: 20,
+            test: '<h3>测试原文输出</h3>',
+            flag: 1,
+            hobby: ['吃饭', '睡觉', '敲代码'],
+            regTime: new Date()
+
+        }
+
+
+        //4.调用template 函数
+        var htmlstr = template('tpl-user', data)
+        console.log(htmlstr)
+
+        // 第五步渲染html结构
+        $('#container').html(htmlstr)
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../AJAX基础/lib/jquery.js"></script>
+</head>
+
+<body>
+    <script>
+        $(function() {
+            //发起JSONP的请求
+            $.ajax({
+                url: 'http://ajax.forntend.itheima.net:3006/api/jsonp?name=zs&age=20',
+                // 代表我们发起JSONP的数据请求
+                dataType: 'jsonp',
+                // 自定义参数
+                jsonp: 'callback',
+                // 自定义回调函数名称
+                jsonpCallback: 'abc',
+                success: function(res) {
+                    console.log(res)
+                }
+            })
+        })
+    </script>
+
+</body>
+
+</html>
